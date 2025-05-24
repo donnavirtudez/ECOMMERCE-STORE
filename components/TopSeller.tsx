@@ -5,93 +5,93 @@ import React, { useRef, useEffect, useState } from "react";
 const jewelryItems = [
   {
     id: 1,
-    name: "Bhen Jewelry",
+    name: "Argent Edge",
     image: "../assets/jewelries/1.png",
-    price: 499.0,
+    price: 2000,
   },
   {
     id: 2,
-    name: "Bhen Jewelry",
+    name: "Celestia Vine",
     image: "../assets/jewelries/2.png",
-    price: 299.99,
+    price: 4500,
   },
   {
     id: 3,
-    name: "Bhen Jewelry",
+    name: "Aurelia Wings",
     image: "../assets/jewelries/14.png",
-    price: 399.5,
+    price: 1500,
   },
   {
     id: 4,
-    name: "Bhen Jewelry",
+    name: "Serpentis Loop",
     image: "../assets/jewelries/53.png",
-    price: 199.99,
+    price: 2500,
   },
   {
     id: 5,
-    name: "Bhen Jewelry",
+    name: "Orion 83",
     image: "../assets/jewelries/59.png",
-    price: 349.99,
+    price: 1800,
   },
   {
     id: 6,
-    name: "Bhen Jewelry",
+    name: "Northern Creed",
     image: "../assets/jewelries/62.png",
-    price: 999.99,
+    price: 2200,
   },
   {
     id: 7,
-    name: "Bhen Jewelry",
+    name: "Azalea Sunburst",
     image: "../assets/jewelries/21.png",
-    price: 1100.0,
+    price: 3200,
   },
   {
     id: 8,
-    name: "Bhen Jewelry",
+    name: "Memento Mori",
     image: "../assets/jewelries/52.png",
-    price: 1150.0,
+    price: 4500,
   },
   {
     id: 9,
-    name: "Bhen Jewelry",
+    name: "Titan Aureus",
     image: "../assets/jewelries/73.png",
-    price: 1200.0,
+    price: 2500,
   },
   {
     id: 10,
-    name: "Bhen Jewelry",
+    name: "Nova Prism",
     image: "../assets/jewelries/37.png",
-    price: 1200.0,
+    price: 2000,
   },
   {
     id: 11,
-    name: "Bhen Jewelry",
+    name: "Orbit Duo",
     image: "../assets/jewelries/13.png",
-    price: 1200.0,
+    price: 3000,
   },
   {
     id: 12,
-    name: "Bhen Jewelry",
+    name: "Isadora Twins",
     image: "../assets/jewelries/12.png",
-    price: 1200.0,
+    price: 3300,
   },
   {
     id: 13,
-    name: "Bhen Jewelry",
+    name: "Silver Frost",
     image: "../assets/jewelries/25.png",
-    price: 1200.0,
+    price: 1900,
   },
   {
     id: 14,
-    name: "Bhen Jewelry",
+    name: "Vespera Slate",
     image: "../assets/jewelries/41.png",
-    price: 1200.0,
+    price: 1200,
   },
   {
     id: 15,
-    name: "Bhen Jewelry",
+    name: "Blue Ember",
     image: "../assets/jewelries/23.png",
-    price: 1200.0,
+    price: 1600,
   },
 ];
 
@@ -163,7 +163,7 @@ const TopSeller: React.FC = () => {
             />
             <div className="p-3 text-center">
               <p className="font-medium text-gray-200">{item.name}</p>
-              <p className="text-sm text-gray-400">₱{item.price.toFixed(2)}</p>
+              <p className="text-sm text-gray-400">₱{item.price}</p>
             </div>
           </div>
         ))}
