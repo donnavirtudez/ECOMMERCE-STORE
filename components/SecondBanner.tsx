@@ -7,7 +7,7 @@ type InfoCardProps = {
 };
 
 const InfoCard: React.FC<InfoCardProps> = ({ Icon, title, description }) => (
-  <div className="flex-1 flex flex-col items-start text-left p-4">
+  <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left p-4">
     <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-black">
       <Icon className="w-8 h-8 text-gray-200" />
     </div>
@@ -25,7 +25,7 @@ const SecondBanner: React.FC = () => {
         `}
       </style>
 
-      <div className="min-h-screen p-4 flex flex-col md:flex-row gap-4">
+      <div className="min-h-screen p-4 flex flex-col md:flex-row">
         <div className="basis-1/2 flex items-center justify-center order-1 md:order-1">
           <img
             src="../banner2.jpg"
@@ -43,7 +43,7 @@ const SecondBanner: React.FC = () => {
               Jewelry should do more than decorate.
             </h1>
             <h2 className="text-black text-xl font-normal leading-relaxed max-w-full whitespace-pre-line mt-2">
-              It should empower, uplift, and tell a story. That’s why we
+              It should empower, uplift, and tell a story. That is why we
               carefully design each piece to reflect authenticity, beauty, and
               confidence. Let our collection become part of your everyday
               elegance.
@@ -58,7 +58,7 @@ const SecondBanner: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 w-full max-w-full">
+          <div className="flex flex-col md:flex-row gap-4 w-full max-w-full items-center md:items-start">
             <InfoCard
               Icon={Hammer}
               title="Skillfully Crafted"

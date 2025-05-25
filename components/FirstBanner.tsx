@@ -18,7 +18,7 @@ const FirstBanner = () => {
               <br className="hidden sm:inline" /> Tells About Your Story
             </h2>
             <p className="text-gray-800 mt-4 text-base sm:text-2xl max-w-md mx-auto lg:mx-0">
-              Necklaces, Wedding Rings, And Earings Are All Available Here.
+              Necklaces, Wedding Rings, And Earrings Are All Available Here.
             </p>
           </div>
 

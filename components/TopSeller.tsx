@@ -7,91 +7,91 @@ const jewelryItems = [
     id: 1,
     name: "Argent Edge",
     image: "../assets/jewelries/1.png",
-    price: 2000,
+    price: 2000.5,
   },
   {
     id: 2,
     name: "Celestia Vine",
     image: "../assets/jewelries/2.png",
-    price: 4500,
+    price: 4500.99,
   },
   {
     id: 3,
     name: "Aurelia Wings",
     image: "../assets/jewelries/14.png",
-    price: 1500,
+    price: 1500.99,
   },
   {
     id: 4,
     name: "Serpentis Loop",
     image: "../assets/jewelries/53.png",
-    price: 2500,
+    price: 2500.99,
   },
   {
     id: 5,
     name: "Orion 83",
     image: "../assets/jewelries/59.png",
-    price: 1800,
+    price: 1800.5,
   },
   {
     id: 6,
     name: "Northern Creed",
     image: "../assets/jewelries/62.png",
-    price: 2200,
+    price: 2200.5,
   },
   {
     id: 7,
     name: "Azalea Sunburst",
     image: "../assets/jewelries/21.png",
-    price: 3200,
+    price: 3200.5,
   },
   {
     id: 8,
     name: "Memento Mori",
     image: "../assets/jewelries/52.png",
-    price: 4500,
+    price: 4500.99,
   },
   {
     id: 9,
     name: "Titan Aureus",
     image: "../assets/jewelries/73.png",
-    price: 2500,
+    price: 2500.99,
   },
   {
     id: 10,
     name: "Nova Prism",
     image: "../assets/jewelries/37.png",
-    price: 2000,
+    price: 2000.5,
   },
   {
     id: 11,
     name: "Orbit Duo",
     image: "../assets/jewelries/13.png",
-    price: 3000,
+    price: 3000.5,
   },
   {
     id: 12,
     name: "Isadora Twins",
     image: "../assets/jewelries/12.png",
-    price: 3300,
+    price: 3300.99,
   },
   {
     id: 13,
     name: "Silver Frost",
     image: "../assets/jewelries/25.png",
-    price: 1900,
+    price: 1900.99,
   },
   {
     id: 14,
     name: "Vespera Slate",
     image: "../assets/jewelries/41.png",
-    price: 1200,
+    price: 1200.5,
   },
   {
     id: 15,
     name: "Blue Ember",
     image: "../assets/jewelries/23.png",
-    price: 1600,
+    price: 1600.5,
   },
 ];
 
@@ -163,7 +163,7 @@ const TopSeller: React.FC = () => {
             />
             <div className="p-3 text-center">
               <p className="font-medium text-gray-200">{item.name}</p>
-              <p className="text-sm text-gray-400">₱{item.price}</p>
+              <p className="text-sm text-gray-400">₱{item.price.toFixed(2)}</p>
             </div>
           </div>
         ))}

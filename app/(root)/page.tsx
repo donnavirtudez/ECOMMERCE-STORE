@@ -7,19 +7,11 @@ import JewelryShowcase from "@/components/JewelryShowcase";
 import Reviews from "@/components/Reviews";
 import SecondBanner from "@/components/SecondBanner";
 import TopSeller from "@/components/TopSeller";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <>
       <FirstBanner />
-      {/* <Image
-        src="/banner.png"
-        alt="banner"
-        width={2000}
-        height={1000}
-        className="w-screen"
-      /> */}
       <Feature />
       <Reviews />
       <TopSeller />
