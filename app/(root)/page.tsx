@@ -1,5 +1,5 @@
-// import Collections from "@/components/Collections";
-// import ProductList from "@/components/ProductList";
+import Collections from "@/components/Collections";
+import ProductList from "@/components/ProductList";
 
 import Feature from "@/components/Feature";
 import FirstBanner from "@/components/FirstBanner";
@@ -15,9 +15,9 @@ export default function Home() {
       <Feature />
       <Reviews />
       <TopSeller />
+      <Collections />
+      <ProductList />
       <SecondBanner />
-      {/* <Collections />
-      <ProductList /> */}
       <JewelryShowcase />
     </>
   );

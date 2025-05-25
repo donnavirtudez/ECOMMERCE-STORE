@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useUser } from "@clerk/nextjs";
 import { Heart } from "lucide-react";
@@ -35,7 +35,9 @@ const HeartFavorite = ({ product, updateSignedInUser }: HeartFavoriteProps) => {
     }
   }, [user]);
 
-  const handleLike = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleLike = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     try {
       if (!user) {
@@ -56,8 +58,8 @@ const HeartFavorite = ({ product, updateSignedInUser }: HeartFavoriteProps) => {
   };
 
   return (
-    <button onClick={handleLike}>
-      <Heart fill={`${isLiked ? "red" : "white"}`} />
+    <button onClick={handleLike} className="cursor-pointer">
+      <Heart fill={isLiked ? "#DC0000" : "#F8F8F8"} />
     </button>
   );
 };

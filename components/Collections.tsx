@@ -1,32 +1,60 @@
 import { getCollections } from "@/lib/actions/actions";
-import Image from "next/image";
-import Link from "next/link";
+
+type CollectionType = {
+  _id: string;
+  title: string;
+  image: string;
+  description?: string;
+};
 
 const Collections = async () => {
-  const collections = await getCollections();
+  const collections: CollectionType[] = await getCollections();
+
+  console.log("Fetched Collections:", collections);
 
   return (
-    <div className="flex flex-col items-center gap-10 py-8 px-5">
-      <p className="text-heading1-bold">Collections</p>
+    <section className="max-w-7xl font-sans mx-auto my-10 px-6 text-gray-900 bg-white">
+      <h2 className="text-4xl font-bold text-center mb-5 tracking-wide">
+        Collections
+      </h2>
+
       {!collections || collections.length === 0 ? (
-        <p className="text-body-bold">No collections found</p>
+        <p className="text-bold text-center text-gray-900 mt-5">
+          No products found
+        </p>
       ) : (
-        <div className="flex flex-wrap items-center justify-center gap-8">
-          {collections.map((collection: CollectionType) => (
-            <Link href={`/collections/${collection._id}`} key={collection._id}>
-              <Image
-                key={collection._id}
-                src={collection.image}
-                alt={collection.title}
-                width={350}
-                height={200}
-                className="rounded-lg cursor-pointer"
+        <div className="flex flex-wrap justify-center gap-4 w-full max-w-6xl mx-auto">
+          {collections.map(({ _id, title, image }) => (
+            <a
+              href={`/collections/${_id}`}
+              key={_id}
+              className="
+                relative 
+                group 
+                cursor-pointer 
+                rounded-lg 
+                overflow-hidden 
+
+                w-[calc(50%-1rem)]     
+                sm:w-[250px]           
+              "
+            >
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-72 object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
               />
-            </Link>
+              <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center px-4">
+                <h3 className="text-gray-200 text-xl font-semibold mb-0">
+                  {title}
+                </h3>
+              </div>
+            </a>
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

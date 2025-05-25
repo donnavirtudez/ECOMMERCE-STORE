@@ -9,11 +9,11 @@ interface ProductCardProps {
   updateSignedInUser?: (updatedUser: UserType) => void;
 }
 
-const ProductCard = ({ product, updateSignedInUser }: ProductCardProps ) => {
+const ProductCard = ({ product, updateSignedInUser }: ProductCardProps) => {
   return (
     <Link
       href={`/products/${product._id}`}
-      className="w-[220px] flex flex-col gap-2"
+      className="w-[250px] flex flex-col gap-2 rounded-lg mt-5 bg-white p-4 shadow-lg"
     >
       <Image
         src={product.media[0]}
@@ -23,12 +23,15 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps ) => {
         className="h-[250px] rounded-lg object-cover"
       />
       <div>
-        <p className="text-base-bold">{product.title}</p>
-        <p className="text-small-medium text-grey-2">{product.category}</p>
+        <p className="font-medium text-gray-800">{product.title}</p>
+        <p className="text-md text-gray-600">{product.category}</p>
       </div>
       <div className="flex justify-between items-center">
-        <p className="text-body-bold">${product.price}</p>
-        <HeartFavorite product={product} updateSignedInUser={updateSignedInUser} />
+        <p className="text-md text-gray-700">₱{product.price.toFixed(2)}</p>
+        <HeartFavorite
+          product={product}
+          updateSignedInUser={updateSignedInUser}
+        />
       </div>
     </Link>
   );
