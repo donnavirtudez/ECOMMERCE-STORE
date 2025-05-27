@@ -27,7 +27,7 @@ const reviewsData = [
     name: "Jisoo K.",
     rating: 4,
     comment:
-      "The quality exceeded my expectations, and the delivery was prompt. I’m already planning to buy more!",
+      "The quality exceeded my expectations, and the delivery was prompt. I am already planning to buy more!",
   },
 ];
 

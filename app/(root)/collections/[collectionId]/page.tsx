@@ -11,7 +11,7 @@ const CollectionDetails = async ({
   const collectionDetails = await getCollectionDetails(params.collectionId);
 
   return (
-    <div className="px-10 py-5 flex flex-col items-center gap-5">
+    <div className="px-10 py-5 flex flex-col items-center gap-3">
       <Image
         src={collectionDetails.image}
         width={1500}
