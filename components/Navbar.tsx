@@ -15,6 +15,7 @@ const Navbar = () => {
   const cart = useCart();
 
   const navbarRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [query, setQuery] = useState("");
   const [isSticky, setIsSticky] = useState(false);
@@ -33,6 +34,27 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownMenu(false);
+      }
+    };
+
+    if (dropdownMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownMenu]);
 
   return (
     <div
@@ -92,14 +114,19 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className="relative flex gap-3 items-center">
+      <div className="relative flex gap-3 items-center" ref={dropdownRef}>
         <Link
           href="/cart"
           className={`border-gray-300 flex items-center gap-1 rounded px-2 py-1 max-md:hidden group hover:text-[#4E71FF] ${
             pathname === "/cart" ? "text-[#4E71FF]" : ""
           }`}
         >
-          <ShoppingCart className="text-gray-800 group-hover:text-[#4E71FF]" />
+          <ShoppingCart
+            className={`${
+              pathname === "/cart" ? "text-[#4E71FF]" : "text-gray-800"
+            } group-hover:text-[#4E71FF]`}
+          />
+
           <p className="text-m group-hover:text-[#4E71FF]">
             ({cart.cartItems.length})
           </p>
@@ -107,11 +134,11 @@ const Navbar = () => {
 
         <Menu
           className="cursor-pointer hover:text-[#4E71FF] lg:hidden"
-          onClick={() => setDropdownMenu(!dropdownMenu)}
+          onClick={() => setDropdownMenu((prev) => !prev)}
         />
 
         {dropdownMenu && (
-          <div className="absolute top-10 right-5 flex flex-col gap-3 p-3 rounded bg-[#FFFFFF] shadow-xl text-m lg:hidden">
+          <div className="absolute top-10 right-5 flex flex-col gap-3 p-5 rounded bg-[#FFFFFF] shadow-xl text-m lg:hidden">
             <Link
               href="/"
               className={`hover:text-[#4E71FF] text-center w-full ${
@@ -142,7 +169,12 @@ const Navbar = () => {
                 pathname === "/cart" ? "text-[#4E71FF]" : ""
               }`}
             >
-              <ShoppingCart className="text-gray-800 group-hover:text-[#4E71FF]" />
+              <ShoppingCart
+                className={`${
+                  pathname === "/cart" ? "text-[#4E71FF]" : "text-gray-800"
+                } group-hover:text-[#4E71FF]`}
+              />
+
               <p className="text-m group-hover:text-[#4E71FF]">
                 ({cart.cartItems.length})
               </p>
