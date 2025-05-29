@@ -97,7 +97,7 @@ const Navbar = () => {
       <div className="flex gap-3 border border-gray-300 px-3 py-1 items-center rounded focus-within:outline-none focus-within:ring-2 focus-within:ring-[#616161]">
         <input
           className="outline-none max-sm:max-w-[120px]"
-          placeholder="Search..."
+          placeholder="Search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => {

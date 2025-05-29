@@ -49,7 +49,7 @@ const jewelryItems = [
     id: 8,
     name: "Stellar Embrace",
     image: "../assets/jewelries/67.png",
-    price: 17000.99,
+    price: 1700.99,
   },
 ];
 
