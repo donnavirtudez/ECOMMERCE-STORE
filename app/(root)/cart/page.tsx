@@ -43,80 +43,95 @@ const Cart = () => {
   };
 
   return (
-    <div className="h-screen flex gap-20 py-16 px-10 max-lg:flex-col max-sm:px-3">
-      <div className="w-2/3 max-lg:w-full">
-        <p className="text-heading3-bold">Shopping Cart</p>
-        <hr className="my-6" />
+    <div className="flex flex-col lg:flex-row justify-between gap-6 px-4 py-6 sm:px-6 md:px-10 min-h-screen bg-white text-gray-800">
+      <div className="w-full lg:w-2/3">
+        <h1 className="text-xl font-semibold mb-4">Shopping Cart</h1>
+        <hr className="mb-4 border-gray-200" />
 
-        {cart.cartItems.length === 0 ? (
-          <p className="text-body-bold">No item in cart</p>
-        ) : (
-          <div>
-            {cart.cartItems.map((cartItem) => (
-              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-4 py-3 items-center max-sm:items-start justify-between">
-                <div className="flex items-center">
+        <div className="space-y-4">
+          {cart.cartItems.length === 0 ? (
+            <p className="text-center text-gray-500 text-base py-10">
+              No item in cart
+            </p>
+          ) : (
+            cart.cartItems.map((cartItem) => (
+              <div
+                key={cartItem.item._id}
+                className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-zinc-50 rounded-md p-4"
+              >
+                <div className="flex items-start gap-4">
                   <Image
                     src={cartItem.item.media[0]}
-                    width={100}
-                    height={100}
-                    className="rounded-lg w-32 h-32 object-cover"
-                    alt="product"
+                    width={96}
+                    height={96}
+                    className="rounded-md w-24 h-24 object-cover"
+                    alt={cartItem.item.title}
                   />
-                  <div className="flex flex-col gap-3 ml-4">
-                    <p className="text-body-bold">{cartItem.item.title}</p>
+                  <div className="flex flex-col justify-between text-sm gap-1">
+                    <span className="text-gray-900 font-semibold">
+                      {cartItem.item.title}
+                    </span>
                     {cartItem.color && (
-                      <p className="text-small-medium">{cartItem.color}</p>
+                      <span className="text-gray-500">
+                        Color: {cartItem.color}
+                      </span>
                     )}
                     {cartItem.size && (
-                      <p className="text-small-medium">{cartItem.size}</p>
+                      <span className="text-gray-500">
+                        Size: {cartItem.size}
+                      </span>
                     )}
-                    <p className="text-small-medium">₱{cartItem.item.price}</p>
+                    <span className="text-gray-700 font-semibold">
+                      ₱{cartItem.item.price}
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-center">
+                <div className="flex items-center gap-3 mt-3 sm:mt-0">
                   <MinusCircle
-                    className="hover:text-red-1 cursor-pointer"
-                    onClick={() => {
-                      if (cartItem.quantity > 1) {
-                        cart.decreaseQuantity(cartItem.item._id);
-                      }
-                    }}
+                    className="w-5 h-5 text-gray-700 hover:text-black cursor-pointer"
+                    onClick={() =>
+                      cartItem.quantity > 1 &&
+                      cart.decreaseQuantity(cartItem.item._id)
+                    }
                   />
-                  <p className="text-body-bold">{cartItem.quantity}</p>
+                  <span className="text-gray-700 text-sm">
+                    {cartItem.quantity}
+                  </span>
                   <PlusCircle
-                    className="hover:text-red-1 cursor-pointer"
+                    className="w-5 h-5 text-gray-700 hover:text-black cursor-pointer"
                     onClick={() => cart.increaseQuantity(cartItem.item._id)}
                   />
+                  <Trash
+                    className="w-5 h-5 text-gray-700 hover:text-red-500 cursor-pointer"
+                    onClick={() => cart.removeItem(cartItem.item._id)}
+                  />
                 </div>
-
-                <Trash
-                  className="hover:text-red-1 cursor-pointer"
-                  onClick={() => cart.removeItem(cartItem.item._id)}
-                />
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
       </div>
 
-      <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-grey-1 rounded-lg px-4 py-5">
-        <p className="text-heading4-bold pb-4">
-          Summary{" "}
-          <span>{`(${cart.cartItems.length} ${
-            cart.cartItems.length > 1 ? "items" : "item"
-          })`}</span>
-        </p>
-        <div className="flex justify-between text-body-semibold">
-          <span>Total Amount</span>
-          <span>₱{totalRounded}</span>
+      <div className="w-full lg:w-1/3 lg:max-w-sm space-y-4">
+        <div className="bg-zinc-50 rounded-md p-5 shadow-sm">
+          <h2 className="text-lg font-semibold mb-3">Summary</h2>
+          <div className="flex justify-between text-sm text-gray-600 mb-1">
+            <span>Items</span>
+            <span>{cart.cartItems.length}</span>
+          </div>
+          <div className="flex justify-between text-base font-medium text-gray-800 border-t border-gray-200 pt-3">
+            <span>Total</span>
+            <span>₱{totalRounded}</span>
+          </div>
+
+          <button
+            onClick={handleCheckout}
+            className="cursor-pointer mt-4 w-full bg-black text-white text-sm font-medium py-2.5 rounded-md hover:bg-zinc-800 transition"
+          >
+            Proceed to Checkout
+          </button>
         </div>
-        <button
-          className="cursor-pointer border rounded-lg text-body-bold bg-white py-3 w-full hover:bg-black hover:text-white"
-          onClick={handleCheckout}
-        >
-          Proceed to Checkout
-        </button>
       </div>
     </div>
   );

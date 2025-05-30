@@ -80,12 +80,12 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         <p className="text-base-medium text-grey-2 font-bold">Quantity:</p>
         <div className="flex gap-4 items-center">
           <MinusCircle
-            className="hover:text-red-1 cursor-pointer"
+            className="text-gray-700 hover:text-black cursor-pointer"
             onClick={() => quantity > 1 && setQuantity(quantity - 1)}
           />
-          <p className="text-body-bold text-gray-700">{quantity}</p>
+          <p className="text-base-bold text-gray-700">{quantity}</p>
           <PlusCircle
-            className="hover:text-red-1 cursor-pointer"
+            className="text-gray-700 hover:text-black cursor-pointer"
             onClick={() => setQuantity(quantity + 1)}
           />
         </div>
