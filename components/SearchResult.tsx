@@ -1,111 +1,38 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ShoppingCart, Star, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
-const products = [
-  {
-    id: 1,
-    title: "Celestia Vine",
-    price: 4500.99,
-    image: "../assets/jewelries/2.png",
-    category: "Necklace",
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    title: "Aurelia Wings",
-    price: 1500.99,
-    image: "../assets/jewelries/14.png",
-    category: "Earrings",
-    rating: 4.0,
-  },
-  {
-    id: 3,
-    title: "Silver Frost",
-    price: 1900.99,
-    image: "../assets/jewelries/25.png",
-    category: "Ring",
-    rating: 5,
-  },
-  {
-    id: 4,
-    title: "Memento Mori",
-    price: 4500.99,
-    image: "../assets/jewelries/52.png",
-    category: "Necklace",
-    rating: 4.5,
-  },
-  {
-    id: 5,
-    title: "Titan Aureus",
-    price: 2500.99,
-    image: "../assets/jewelries/73.png",
-    category: "Bracelet",
-    rating: 4.5,
-  },
-];
+interface ProductType {
+  _id: string;
+  title: string;
+  description: string;
+  media: string[];
+  category: string;
+  collections: string[];
+  tags: string[];
+  price: number;
+  cost: number;
+  sizes: string[];
+  colors: string[];
+  createdAt: string;
+  updatedAt: string;
+}
 
-const categories = ["All", "Ring", "Necklace", "Earrings", "Bracelet"];
+interface CollectionType {
+  _id: string;
+  title: string;
+  products: number;
+  image: string;
+}
 
 const sortOptions = [
   { value: "relevance", label: "Sort by Relevance" },
   { value: "priceLow", label: "Price: Low to High" },
   { value: "priceHigh", label: "Price: High to Low" },
+  { value: "alphaAsc", label: "Alphabetical: A to Z" },
+  { value: "alphaDesc", label: "Alphabetical: Z to A" },
 ];
-
-function renderStars(rating: number) {
-  const stars = [];
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
-  for (let i = 0; i < fullStars; i++) {
-    stars.push(
-      <Star
-        key={`full-${i}`}
-        size={16}
-        className="text-gray-900"
-        strokeWidth={1.5}
-        fill="currentColor"
-      />
-    );
-  }
-
-  if (hasHalfStar) {
-    stars.push(
-      <div key="half" className="relative w-4 h-4">
-        <Star
-          size={16}
-          className="text-gray-400 absolute top-0 left-0"
-          strokeWidth={1.5}
-          fill="none"
-        />
-        <Star
-          size={16}
-          className="text-gray-900 absolute top-0 left-0"
-          strokeWidth={1.5}
-          fill="currentColor"
-          style={{ clipPath: "inset(0 50% 0 0)" }}
-        />
-      </div>
-    );
-  }
-
-  for (let i = 0; i < emptyStars; i++) {
-    stars.push(
-      <Star
-        key={`empty-${i}`}
-        size={16}
-        className="text-gray-400"
-        strokeWidth={1.5}
-        fill="none"
-      />
-    );
-  }
-
-  return <div className="flex space-x-1">{stars}</div>;
-}
 
 function CustomSelect({
   options,
@@ -192,10 +119,27 @@ function CustomSelect({
   );
 }
 
-export default function SearchResult() {
+export default function SearchResult({
+  initialProducts,
+  query,
+  collections,
+}: {
+  initialProducts: ProductType[];
+  query: string;
+  collections: CollectionType[];
+}) {
+  const uniqueCategories = Array.from(
+    new Set(initialProducts.map((p) => p.category).filter(Boolean))
+  );
+
+  const categories = ["All", ...uniqueCategories];
+
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     "All",
   ]);
+
+  const [mobileSelectedCategory, setMobileSelectedCategory] = useState("All");
+
   const [sort, setSort] = useState("relevance");
 
   const handleCategoryChange = (category: string) => {
@@ -204,27 +148,60 @@ export default function SearchResult() {
     } else {
       setSelectedCategories((prev) => {
         const withoutAll = prev.filter((cat) => cat !== "All");
-        return prev.includes(category)
-          ? withoutAll.filter((cat) => cat !== category)
-          : [...withoutAll, category];
+        if (prev.includes(category)) {
+          const filtered = withoutAll.filter((cat) => cat !== category);
+          return filtered.length === 0 ? ["All"] : filtered;
+        } else {
+          return [...withoutAll, category];
+        }
       });
     }
   };
 
+  const handleMobileCategoryChange = (category: string) => {
+    setMobileSelectedCategory(category);
+
+    if (category === "All") {
+      setSelectedCategories(["All"]);
+    } else {
+      setSelectedCategories([category]);
+    }
+  };
+
   const isAllSelected = selectedCategories.includes("All");
-  const filteredProducts = isAllSelected
-    ? products
-    : products.filter((p) => selectedCategories.includes(p.category));
+  const filteredDesktopProducts = isAllSelected
+    ? initialProducts
+    : initialProducts.filter((p) => selectedCategories.includes(p.category));
+
+  const filteredMobileProducts =
+    mobileSelectedCategory === "All"
+      ? initialProducts
+      : initialProducts.filter((p) => p.category === mobileSelectedCategory);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 1024);
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const filteredProducts = isMobile
+    ? filteredMobileProducts
+    : filteredDesktopProducts;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sort === "priceLow") return a.price - b.price;
     if (sort === "priceHigh") return b.price - a.price;
+    if (sort === "alphaAsc")
+      return a.title.localeCompare(b.title, undefined, { sensitivity: "base" });
+    if (sort === "alphaDesc")
+      return b.title.localeCompare(a.title, undefined, { sensitivity: "base" });
     return 0;
   });
-
-  const handleAddToCart = (productId: number) => {
-    alert(`Added product ${productId} to cart!`);
-  };
 
   return (
     <div className="min-h-screen bg-white text-gray-900 max-w-7xl mx-auto px-4 py-10">
@@ -237,7 +214,7 @@ export default function SearchResult() {
             {categories.map((cat) => (
               <label
                 key={cat}
-                className="flex items-center space-x-2 text-lg text-gray-700"
+                className="flex items-center space-x-2 text-lg text-gray-700 cursor-pointer"
               >
                 <input
                   type="checkbox"
@@ -254,8 +231,9 @@ export default function SearchResult() {
         <main className="flex-1 flex flex-col space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 className="text-xl text-gray-800 font-bold uppercase tracking-wide">
-              Search Results
+              Search Results for <span className="italic">{query}</span>
             </h2>
+
             <div className="flex items-center gap-4 flex-wrap">
               <div className="block lg:hidden">
                 <CustomSelect
@@ -263,10 +241,11 @@ export default function SearchResult() {
                     value: c,
                     label: c,
                   }))}
-                  selected={selectedCategories[0]}
-                  onChange={(val) => handleCategoryChange(val)}
+                  selected={mobileSelectedCategory}
+                  onChange={handleMobileCategoryChange}
                 />
               </div>
+
               <CustomSelect
                 options={sortOptions}
                 selected={sort}
@@ -276,31 +255,23 @@ export default function SearchResult() {
           </div>
 
           <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-            {sortedProducts.map(({ id, title, price, image, rating }) => (
+            {sortedProducts.map(({ _id, title, price, media }) => (
               <article
-                key={id}
+                key={_id}
                 className="shadow-lg bg-[#F0F0F0] cursor-pointer group relative flex flex-col rounded-lg border border-gray-200 overflow-hidden shadow-sm transition-transform hover:-translate-y-1"
               >
                 <img
-                  src={image}
+                  src={media[0]}
                   alt={title}
                   loading="lazy"
                   className="w-full h-55 object-cover rounded-t-lg"
                 />
                 <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-lg font-medium truncate">{title}</h3>
-                  <div className="mt-1">{renderStars(rating)}</div>
                   <p className="mt-1 text-base font-semibold">
                     ₱{price.toFixed(2)}
                   </p>
                 </div>
-                <button
-                  onClick={() => handleAddToCart(id)}
-                  className="cursor-pointer absolute bottom-3 right-3 bg-gray-900 text-white rounded-full p-2 shadow focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-900 hover:bg-[#4E71FF]"
-                  aria-label="Add to cart"
-                >
-                  <ShoppingCart size={18} />
-                </button>
               </article>
             ))}
           </section>
