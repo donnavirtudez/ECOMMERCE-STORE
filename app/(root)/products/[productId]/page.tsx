@@ -18,14 +18,18 @@ const ProductDetails = async ({
         <ProductInfo productInfo={productDetails} />
       </div>
 
-      <div className="flex flex-col items-center px-10 py-5 max-md:px-3">
-        <p className="font-bold text-2xl text-center text-gray-900">Related Products</p>
-        <div className="flex flex-wrap gap-5 mx-auto justify-center">
-          {relatedProducts?.map((product: ProductType) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+      {relatedProducts && relatedProducts.length > 0 && (
+        <div className="flex flex-col items-center px-10 py-5 max-md:px-3">
+          <p className="font-bold text-2xl text-center text-gray-900">
+            Related Products
+          </p>
+          <div className="flex flex-wrap gap-5 mx-auto justify-center">
+            {relatedProducts?.map((product: ProductType) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

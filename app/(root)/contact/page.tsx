@@ -141,7 +141,7 @@ const ContactUs = () => {
               <div>
                 <button
                   type="submit"
-                  className={`cursor-pointer w-full py-3 px-4 bg-black text-white rounded hover:bg-[#585858] focus:outline-none focus:ring-2 focus:ring-[#616161] ${
+                  className={`cursor-pointer w-full py-3 px-4 bg-black text-white rounded hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-[#616161] ${
                     loading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   disabled={loading}

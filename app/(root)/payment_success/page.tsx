@@ -54,10 +54,10 @@ const SuccessfulPayment = () => {
       )}
 
       <div className="z-20 flex flex-col items-center text-center space-y-2">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
           🎉 Payment Successful!
         </h1>
-        <p className="text-lg sm:text-xl text-gray-700 max-w-md">
+        <p className="text-md sm:text-lg text-gray-700 max-w-md">
           Thank you for your purchase.
           <br />
           We truly appreciate your support!

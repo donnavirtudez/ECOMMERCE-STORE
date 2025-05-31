@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ToasterProvider from "@/lib/providers/ToasterProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GoToTopButton from "@/components/GoToTopButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
           {children}
           <ToastContainer position="bottom-center" autoClose={1500} />
           <Footer />
+          <GoToTopButton />
         </ClerkProvider>
       </body>
     </html>

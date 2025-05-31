@@ -231,7 +231,7 @@ export default function SearchResult({
         <main className="flex-1 flex flex-col space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 className="text-xl text-gray-800 font-bold uppercase tracking-wide">
-              Search Results for <span className="italic">{query}</span>
+              Search Results for <span>"{query}"</span>
             </h2>
 
             <div className="flex items-center gap-4 flex-wrap">

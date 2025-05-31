@@ -45,7 +45,10 @@ const Cart = () => {
   return (
     <div className="flex flex-col lg:flex-row justify-between gap-6 px-4 py-6 sm:px-6 md:px-10 min-h-screen bg-white text-gray-800">
       <div className="w-full lg:w-2/3">
-        <h1 className="text-xl font-semibold mb-4">Shopping Cart</h1>
+        <h1 className="text-xl font-semibold mb-4 text-center lg:text-left">
+          Shopping Cart
+        </h1>
+
         <hr className="mb-4 border-gray-200" />
 
         <div className="space-y-4">
@@ -127,7 +130,7 @@ const Cart = () => {
 
           <button
             onClick={handleCheckout}
-            className="cursor-pointer mt-4 w-full bg-black text-white text-sm font-medium py-2.5 rounded-md hover:bg-zinc-800 transition"
+            className="cursor-pointer mt-4 w-full bg-black text-white text-sm font-medium py-2.5 rounded hover:bg-zinc-800 transition"
           >
             Proceed to Checkout
           </button>

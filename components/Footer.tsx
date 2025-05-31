@@ -162,7 +162,7 @@ const Footer = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`cursor-pointer bg-[#000000] text-white text-m py-2 rounded hover:bg-[#585858] ${
+              className={`cursor-pointer bg-[#000000] text-white text-m py-2 rounded hover:bg-zinc-800 ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
