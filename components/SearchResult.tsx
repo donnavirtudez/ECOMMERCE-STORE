@@ -267,8 +267,10 @@ export default function SearchResult({
                   className="w-full h-55 object-cover rounded-t-lg"
                 />
                 <div className="p-4 flex flex-col flex-grow">
-                  <h3 className="text-lg font-medium truncate">{title}</h3>
-                  <p className="mt-1 text-base font-semibold">
+                  <h3 className="text-lg font-medium truncate text-center">
+                    {title}
+                  </h3>
+                  <p className="mt-1 text-base text-center">
                     ₱{price.toFixed(2)}
                   </p>
                 </div>
