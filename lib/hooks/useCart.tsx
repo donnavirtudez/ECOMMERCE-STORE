@@ -5,8 +5,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 interface CartItem {
   item: ProductType;
   quantity: number;
-  color?: string; // ? means optional
-  size?: string; // ? means optional
+  color?: string;
+  size?: string;
 }
 
 interface CartStore {
@@ -24,7 +24,7 @@ const useCart = create(
       cartItems: [],
       addItem: (data: CartItem) => {
         const { item, quantity, color, size } = data;
-        const currentItems = get().cartItems; // all the items already in cart
+        const currentItems = get().cartItems;
         const isExisting = currentItems.find(
           (cartItem) => cartItem.item._id === item._id
         );
